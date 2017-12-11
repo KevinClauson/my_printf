@@ -1,0 +1,144 @@
+.TH _PRINTF 1 "25 October 2017" "GNU" "Linux Programmer's Manual"
+.SH NAME
+_printf \- formatted output conversion
+.SH SYNOPSIS
+.B #include "holberton.h"
+.LP
+.B int _printf(const char *
+.I format
+.B , ...);
+.SH DESCRIPTION
+The function
+.B _printf()
+writes to
+.I stdout
+also know as the standard output stream.
+This function writes under the control of a
+.I format
+string that determines how later arguments are converted for output.
+.SH RETURN VALUE
+When successful, the number of characters printed will be returned not including the terminating null byte.
+If there is an error or a NULL pointer is passed as an argument then a negative value is returned. A negative value will also be returned if there is only a % sign passed or a lone % is passed with a space after it.
+.SH Format of the format string
+The format string is a string of characters which begins and ends in its initial shift state, if any. It is composed of zero or more directives which consists of two categories:
+.B  1)
+ordinary characters (not
+.B %
+) which are printed/copied unchanged to the output stream and
+.B 2)
+conversion specifications e.g
+.B %c.
+.LP
+After type promotion, the arguments must correspond correctly with the conversion specifier (
+.B %
+). Arguments, by default, are executed in the order in which they are written. So essential the first argument passed corresponds with the first conversion specifier while the second argument pairs with the second conversion specifier. This pattern will continue as more arguments are passed.
+.SH The conversion specifier
+A character that indicates the type of conversion that takes place.
+The following is a list of conversion specifiers and descriptions of them:
+.LP
+.B d, i
+.RS 5
+The d and i format specifiers recieve an
+.I int
+argument and prints the value in single decimal notation while returning the amount of numbers printed.
+.RE
+.LP
+.B o, u, x, X
+.RS 5
+An
+.I unsigned int
+argument is converted into an unsigned octal (
+.B o
+), unsigned decimal (
+.B u
+), or unsigned hexadecimal (
+.B x
+and
+.B X
+) notation. For the
+.B x
+coversion the letters
+.B abcdef
+are used while the letters
+.B ABCDEF
+are used for the
+.B X
+conversion. The amount of digits and/or characters printed is returned.
+.RE
+.LP
+.B c
+.RS 5
+The
+.I int
+argument is converted to an
+.I unsigned char
+and the character is then printed. The return value will be 1.
+.RE
+.LP
+.B s
+.RS 5
+The
+.I const char *
+argument is expected to be a pointer to a string (an array of characters). The characters in said array are always ended by adding a terminating null byte (
+.B '\\\0'
+). The amount of characters printed, excluding the terminating null byte, are returned.
+.RE
+.LP
+.SH BUGS
+No known bugs at this time.
+.LP
+.SH EXAMPLE
+The following examples require the inclusion of the
+.B "holberton.h"
+header file written as: #include "holberton.h"
+.LP
+.RS 5
+To print the date "October 25, 2017":
+.LP
+.RS 6
+_printf("October %d, %d\\n", 25, 2017);
+.RE
+.LP
+To print a single character:
+.LP
+.RS 6
+_printf("%c\\n", 'H');
+.RE
+.LP
+To print a string:
+.LP
+.RS 6
+_printf("%s\\n", "apple");
+.RE
+.LP
+To print an unsigned integer:
+.LP
+.RS 6
+_printf("%u\\n", 2000);
+.RE
+.LP
+To print a number in octal notation:
+.LP
+.RS 6
+_printf("%o\\n", 1000);
+.RE
+.LP
+To print a number in hexadecimal notation:
+.LP
+.RS 6
+_printf("%x, %X\\n", 100, 200);
+.RE
+.LP
+To print using rot13 notation:
+.LP
+.RS 6
+_printf("%R\\n", 'a');
+.RE
+.RE
+
+.SH
+SEE ALSO
+.B printf(3)
+.SH
+Authors
+Kevin Clauson and Dan Parham
